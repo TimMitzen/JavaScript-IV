@@ -80,6 +80,7 @@ class Person {
         return `Hello my name is ${this.name} and I am from ${this.location}. `
     }
 }
+
 // #### Instructor
 
 // * Now that we have a Person as our base class, we'll build our Instructor class.
@@ -92,7 +93,7 @@ class Person {
 //   * `demo` receives a `subject` string as an argument and logs out the phrase 'Today we are learning about {subject}' where subject is the param passed in.
 //   * `grade` receives a `student` object and a `subject` string as arguments and logs out '{student.name} receives a perfect score on {subject}'
 
-class Instructor {
+class Instructor extends Person {
     super(intAttrs) {
         this.specialty = intAttrs.specialty;
         this.favLanguage = intAttrs.favLanguage;
@@ -102,8 +103,8 @@ class Instructor {
         return `Today we learned ${subject}.`;
     }
     
-    grade(studentObj, subject) {
-        return `${student.name}receives a prefect score on ${subject}!`
+    grade(student, subject) {
+        return `${student.name} receives a prefect score on ${subject}!`
     }
 }
 
@@ -128,14 +129,20 @@ class Student extends Person {
         this.favSubjects = studAttrs.favSubjects;
     }
     listsSubjects() {
-        return `$`;//maybe a for loop
-    }
+        return `${this.favSubjects.join(", " )}`;
+         //this.favSubjects.forEach(subject => {
+            //console.log(subject)});
+        }
 
     PRAssignment(subject) {
-        return `${student.name}`
+        return `${this.name} has submitted a PR for ${subject}`
     }
+    sprintChallenge(subject){
+        return `${this.name}has begun sprint challenge on ${subject} `
 
+    }
 } 
+
 
 // #### Project Manager
 
@@ -154,4 +161,89 @@ class ProjectManagers extends Instructor {
         this.gradClassName = pmAttrs.gradClassName;
         this.favLanguage = pmAttrs.favLanguage;
     }
+    standUp(slackChannel){
+        return `${this.name} announces to the ${slackChannel}, @channel standy time!`
+    }
+    debugsCode(student, subject) {
+        return `${this.name} debugs ${student.name}'s code on ${subject}.`
+    }
 }
+
+const jerry = new ProjectManagers({
+    name: "Jerry",
+    location: "Europe",
+    age: 43,
+    gradClassName: "Web1",
+    favLanguage: "Java",
+    specialty: "Front-end",
+    catchPhrase: "Sup",
+});
+
+const frank = new ProjectManagers({
+    name: "Frank",
+    location: "Europe",
+    age: 23,
+    gradClassName: "Web5",
+    favLanguage: "HTML",
+    specialty: "Front-end",
+    catchPhrase: "HELLO you people",
+});
+
+
+
+    const joe = new Instructor({
+        name: "Joe",
+        location: "New york",
+        age: 40,
+        favLanguage: "JavaScript",
+        specialty: "Back-end",
+        catchPhrase: "Whats Up",
+    });
+
+    const pete = new Instructor({
+        name: "Pete",
+        location: "Delaware",
+        age: 44,
+        favLanguage: "React",
+        specialty: "Full-Stack",
+        catchPhrase: "Whats going on",
+    });
+    const jim = new Student ({
+        name: "Jim",
+        location: "Florida",
+        age: 28,
+        previousBackground: "Truck Driver",
+        className: "Webpt8",
+        favSubjects:["Javascript", "HTML", "React"]
+    });
+    
+    const john = new Student ({
+        name: "John",
+        location: "New York",
+        age: 55,
+        previousBackground: "Cook",
+        className: "Webpt8",
+        favSubjects: ["CSS", "HTML", "React"],
+    });
+    const tim = new Person ({
+        name: "Tim",
+        location: "Delaware",
+        age: 43,
+    });
+        
+    const kim = new Person({
+        name: "Kim",
+        location: "Delaware",
+        age: 43,
+    });
+    console.log(kim.speak());
+    console.log(tim.speak());
+    console.log(pete.demo("Css"));
+    console.log(pete.grade(jim,"Javascript"))
+    console.log(frank.standUp("webpt8"));
+    console.log(frank.debugsCode(john,"CSS"));
+    console.log(jim.listsSubjects());
+    console.log(john.listsSubjects());
+    console.log(pete.grade(tim , "css" ));
+    console.log(joe.demo("HTML"));
+    console.log(joe.grade(john, "Css"))
